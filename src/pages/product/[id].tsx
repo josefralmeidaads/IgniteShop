@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from "next/head";
 import { ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages/products';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { stripe } from '@/lib/stripe';
@@ -37,23 +38,28 @@ const Product = ({ product }: ProductProps) => {
   }
 
   return (
-    <ProductContainer>
-      <ImageContainer>
-        <Image src={product.imageUrl} width={520} height={480} alt=''/>
-      </ImageContainer>
+    <>
+      <Head>
+        <title>{product.name} | Ignite Shop</title>
+      </Head>
+      <ProductContainer>
+        <ImageContainer>
+          <Image src={product.imageUrl} width={520} height={480} alt=''/>
+        </ImageContainer>
 
-      <ProductDetails>
-        <h1>{product.name}</h1>
+        <ProductDetails>
+          <h1>{product.name}</h1>
 
-        <span>{product.price}</span>
+          <span>{product.price}</span>
 
-        <p>
-          {product.description}
-        </p>
+          <p>
+            {product.description}
+          </p>
 
-        <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar Agora</button>
-      </ProductDetails>
-    </ProductContainer>
+          <button disabled={isCreatingCheckoutSession} onClick={handleBuyProduct}>Comprar Agora</button>
+        </ProductDetails>
+      </ProductContainer>
+    </>
   )
 }
 
